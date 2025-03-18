@@ -68,6 +68,10 @@ function createMessage(token, platform) {
               'mutable-content': 1,
               sound: 'default',
             },
+            // fcm_options: {
+            //   image:
+            //     'https://login.care.inhandplus.com/images/ihp-manager-circle.png',
+            // },
           },
         },
       },
