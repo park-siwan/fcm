@@ -48,11 +48,10 @@ function createMessage(token, platform) {
     const iosMessage = {
       message: {
         token: token,
-        notification: {
+
+        data: {
           title: notificationTitle,
           body: notificationBody,
-        },
-        data: {
           target_url: targetUrl,
         },
         apns: {
@@ -69,10 +68,6 @@ function createMessage(token, platform) {
               'mutable-content': 1,
               sound: 'default',
             },
-            // fcm_options: {
-            //   image:
-            //     'https://login.care.inhandplus.com/images/ihp-manager-circle.png',
-            // },
           },
         },
       },
