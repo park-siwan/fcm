@@ -9,7 +9,7 @@ const FCM_URL =
 // 토큰 배열 (플랫폼별로 구분)
 const tokens = {
   ios: [
-    'cdq_4SieIUrXkfb_h3R1AY:APA91bF_296uESJdOOr1fytxt_kX-4VnRa8EBGcEoAyYagv8eTr2hnxrp0AW8khRlfhQG0ID9j9-VHPA50QiV6Vlp-_bawm2TCqSwu4t1t6QXMDDV1luVdA',
+    'ex7sQ4_5gEJ_pnwDccCtmb:APA91bEqqOb4c4TeLGOWhMh52bqlvM1tqjOPX8LDiA5sf6IRCDjoLvOjqyC4kyxOanjeoKoJwCQnGEXmkmrIScxnpY_P-KZFkNfZAKtOcKLKKVKR6k0ad_k',
   ],
   android: [
     'cCXn-pRQRnafokLmnG9SXU:APA91bH7ve4zu4zjhgo9cbRDu3uxwDMqkEdU_dy5ey9iMn-hkLDP66ayuOq4K-UFMekgSw5W2E-LjLB4yvWNGm31yToZb_RFmPS55iKK0N-2mlGhEmcyda8',
