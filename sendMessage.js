@@ -6,51 +6,196 @@ require('dotenv').config();
 const FCM_URL =
   'https://fcm.googleapis.com/v1/projects/inhandplus-d8fb1/messages:send';
 
-// 메시지 데이터
-const message = {
-  message: {
-    token:
-      // 'f3IVPuhNQne8MYRBfMJse5:APA91bF1-h011coO-D3_Hqsm7ZMmo8wBWblc5XWIKubbB-ZR1rljP0g6n6fNS-UNnmCiNbMzkzURgNoLZXMYiuRwSC9ChNrTI-yQ64XwPagg-Lze7KUwWrc', // 기기의 FCM 토큰 갤럭시 s10
-      // 'dVXiSNn3Q3i3aPJpm4_o4-:APA91bEAKyRLdejLvBM4IGNBjRPtp9RHm-bpoCZ2nCMqzEkwPhkO6zZw-Ko8IMOkGH4UWeg0KS4G1LerINvp3GBWQGTfk_SaMe4zNqbswOQ9E8sJph4MozI', //Medium Phone API 35
-      // 'dgnhiUDzR-efNsn0sDmdal:APA91bHlY7tkQAfplq6ONBbUxZt9t6yxHrmMKXj8NJ0txe-vyjF-QQYjs__mqyclkZPRGqYik9mxCVQO51HBRMrvar5dZPGlxjfAg2YoOqGnZkFtK7lzapk', //현성
-      'eaxSepE0SWuSP3y1bjdaEi:APA91bEfgQBUUSk8A39sVCaZ7ifft-6huZxnnKqErUISB5mb49eBBIVNzkw_wap0t234YOeQXAM_Yyc3IYnriDVy3_yypMxfzlaV5ZEUysggLRW6hDNdexw', //시완 웹뷰2
-    // notification: {
-    //   title: '응급상황(낙상감지)',
-    //   body: '참여자의 낙상이 감지되었습니다.',
-    // },
-    data: {
-      title: '응급상황(낙상감지)',
-      body: '참여자의 낙상이 감지되었습니다.',
-      // target_url: 'http://localhost:3000/ko/participant-info',
-      target_url:
-        'http://localhost:3000/ko/help/9154d7dfe98b46af9a39bbf373039fec',
-      // target_url: '',
-    },
-  },
+// 토큰 배열 (플랫폼별로 구분)
+const tokens = {
+  ios: [
+    'eP_abOCxjUYIiqPJRrtbkC:APA91bFmmvrWb8qJOy9HnTDPwwDx8A63dVr0KLYeKVQIe7NWkgHdfk_0Hm_FjqAjgsTkaX6M2cgZBbl7WBV2TCrhApS-u7j7PtJ2ayDiUqwFVoUZp7apyLE',
+  ],
+  android: [
+    // 안드로이드 토큰 추가
+    // 'android_token_here'
+  ],
 };
+
+// 메시지 데이터 (공통 부분)
+const notificationTitle =
+  '응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)';
+const notificationBody =
+  '참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.';
+const targetUrl =
+  'http://localhost:3000/ko/help/9154d7dfe98b46af9a39bbf373039fec';
+
+// 플랫폼별 메시지 생성 함수
+function createMessage(token, platform) {
+  // 기본 데이터 (모든 플랫폼 공통)
+  const dataPayload = {
+    title: notificationTitle,
+    body: notificationBody,
+    target_url: targetUrl,
+    click_action: 'FLUTTER_NOTIFICATION_CLICK', // Flutter 앱을 위한 액션
+    channel_id: 'high_importance_channel', // 안드로이드용 채널 ID
+  };
+
+  // 안드로이드 전용 메시지
+  if (platform === 'android') {
+    return {
+      message: {
+        token: token,
+        data: dataPayload,
+        android: {
+          priority: 'high',
+          notification: {
+            sound: 'default',
+            default_sound: true,
+            default_vibrate_timings: true,
+            default_light_settings: true,
+            notification_priority: 'PRIORITY_HIGH',
+            visibility: 'PUBLIC',
+            icon: 'notification_icon',
+            color: '#FF0000',
+          },
+        },
+      },
+    };
+  }
+  // iOS 전용 메시지
+  else if (platform === 'ios') {
+    return {
+      message: {
+        token: token,
+        notification: {
+          title: notificationTitle,
+          body: notificationBody,
+        },
+        data: {
+          target_url: targetUrl,
+        },
+        apns: {
+          headers: {
+            'apns-priority': '10',
+            'apns-push-type': 'alert',
+          },
+          payload: {
+            aps: {
+              alert: {
+                title: notificationTitle,
+                body: notificationBody,
+              },
+              'content-available': 1,
+              'mutable-content': 1,
+              sound: 'default',
+              badge: 1,
+            },
+            fcm_options: {
+              image: 'https://login.care.inhandplus.com/images/logo.png',
+            },
+          },
+        },
+      },
+    };
+  }
+  // 플랫폼 미지정 시 범용 메시지
+  else {
+    return {
+      message: {
+        token: token,
+        notification: {
+          title: notificationTitle,
+          body: notificationBody,
+        },
+        data: dataPayload,
+      },
+    };
+  }
+}
 
 async function sendMessage() {
   try {
     // Access Token 가져오기
     const accessToken = await getAccessToken();
-    // console.log(accessToken);
-    // FCM API 호출
-    const response = await axios.post(FCM_URL, message, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        'Content-Type': 'application/json',
+
+    // 전송 결과 저장
+    const results = [];
+    const allTokens = [];
+
+    // iOS 토큰 처리
+    for (const token of tokens.ios) {
+      allTokens.push({ token, platform: 'ios' });
+    }
+
+    // 안드로이드 토큰 처리
+    for (const token of tokens.android) {
+      allTokens.push({ token, platform: 'android' });
+    }
+
+    // 모든 토큰에 대해 메시지 전송
+    for (const { token, platform } of allTokens) {
+      const message = createMessage(token, platform);
+      console.log(
+        `${platform} 기기로 전송할 메시지:`,
+        JSON.stringify(message, null, 2),
+      );
+
+      // FCM API 호출
+      try {
+        const response = await axios.post(FCM_URL, message, {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        console.log(
+          `메시지가 성공적으로 전송되었습니다 (${platform} 토큰: ${token.substring(
+            0,
+            10,
+          )}...):`,
+          response.data,
+        );
+        results.push({ token, platform, success: true, data: response.data });
+      } catch (err) {
+        console.error(
+          `메시지 전송 오류 (${platform} 토큰: ${token.substring(0, 10)}...):`,
+          err.response ? err.response.data : err.message,
+        );
+
+        if (
+          err.response &&
+          err.response.data.error &&
+          err.response.data.error.details
+        ) {
+          console.error('상세 오류:', err.response.data.error.details);
+        }
+
+        results.push({
+          token,
+          platform,
+          success: false,
+          error: err.response ? err.response.data : err.message,
+        });
+      }
+    }
+
+    // 결과 요약
+    console.log('모든 메시지 전송 결과:', {
+      total: allTokens.length,
+      success: results.filter((r) => r.success).length,
+      failure: results.filter((r) => !r.success).length,
+      byPlatform: {
+        ios: {
+          total: results.filter((r) => r.platform === 'ios').length,
+          success: results.filter((r) => r.platform === 'ios' && r.success)
+            .length,
+        },
+        android: {
+          total: results.filter((r) => r.platform === 'android').length,
+          success: results.filter((r) => r.platform === 'android' && r.success)
+            .length,
+        },
       },
     });
-
-    console.log('Message sent successfully:', response.data);
   } catch (error) {
-    console.error(
-      'Error sending message:',
-      error.response ? error.response.data : error.message,
-    );
-    if (error.response) {
-      console.error(error.response.data.error.details);
-    }
+    console.error('메시지 전송 중 일반 오류:', error.message);
   }
 }
 
