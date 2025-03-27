@@ -9,11 +9,10 @@ const FCM_URL =
 // 토큰 배열 (플랫폼별로 구분)
 const tokens = {
   ios: [
-    'eP_abOCxjUYIiqPJRrtbkC:APA91bFmmvrWb8qJOy9HnTDPwwDx8A63dVr0KLYeKVQIe7NWkgHdfk_0Hm_FjqAjgsTkaX6M2cgZBbl7WBV2TCrhApS-u7j7PtJ2ayDiUqwFVoUZp7apyLE',
+    'ex7sQ4_5gEJ_pnwDccCtmb:APA91bEqqOb4c4TeLGOWhMh52bqlvM1tqjOPX8LDiA5sf6IRCDjoLvOjqyC4kyxOanjeoKoJwCQnGEXmkmrIScxnpY_P-KZFkNfZAKtOcKLKKVKR6k0ad_k',
   ],
   android: [
-    // 안드로이드 토큰 추가
-    // 'android_token_here'
+    'cCXn-pRQRnafokLmnG9SXU:APA91bH7ve4zu4zjhgo9cbRDu3uxwDMqkEdU_dy5ey9iMn-hkLDP66ayuOq4K-UFMekgSw5W2E-LjLB4yvWNGm31yToZb_RFmPS55iKK0N-2mlGhEmcyda8',
   ],
 };
 
@@ -93,33 +92,34 @@ function createMessage(token, platform) {
         },
       },
     };
+    console.log('[iOS] 메시지 생성 완료');
+    return iosMessage;
   }
-  // 플랫폼 미지정 시 범용 메시지
-  else {
-    return {
-      message: {
-        token: token,
-        notification: {
-          title: notificationTitle,
-          body: notificationBody,
-        },
-        data: dataPayload,
-      },
-    };
-  }
+
+  console.log('[ERROR] 알 수 없는 플랫폼:', platform);
+  return null;
 }
 
 async function sendMessage() {
   try {
+    console.log('\n=== FCM 메시지 전송 시작 ===');
+
     // Access Token 가져오기
     const accessToken = await getAccessToken();
+    console.log('Access Token 획득 완료');
 
     // 전송 결과 저장
     const results = [];
     const allTokens = [];
 
+    // 토큰 정보 출력
+    console.log('\n[토큰 현황]');
+    console.log('iOS 토큰 수:', tokens.ios.length);
+    console.log('Android 토큰 수:', tokens.android.length);
+
     // iOS 토큰 처리
     for (const token of tokens.ios) {
+      console.log('\n[iOS] 토큰 추가:', token.substring(0, 10) + '...');
       allTokens.push({ token, platform: 'ios' });
     }
 
@@ -199,4 +199,6 @@ async function sendMessage() {
   }
 }
 
+// 실행
+console.log('\n=== FCM 메시지 전송 프로그램 시작 ===');
 sendMessage();
