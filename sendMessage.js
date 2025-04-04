@@ -9,7 +9,7 @@ const FCM_URL =
 // 토큰 배열 (플랫폼별로 구분)
 const tokens = {
   ios: [
-    'ex7sQ4_5gEJ_pnwDccCtmb:APA91bEqqOb4c4TeLGOWhMh52bqlvM1tqjOPX8LDiA5sf6IRCDjoLvOjqyC4kyxOanjeoKoJwCQnGEXmkmrIScxnpY_P-KZFkNfZAKtOcKLKKVKR6k0ad_k',
+    'dMTtn9MhdUF8kSzckjyV-K:APA91bHk73NuxfIcUXFmJsf0XR-I-8lTERCLdnxmxHw9u8mSHXRZGhT_pCW1dWF2I-JFlgOm5l_0jXXSQy6OuY3k9Cs9vsEa1YDjA0Sh0Mn-ANCydjEH7mo',
   ],
   android: [
     'cCXn-pRQRnafokLmnG9SXU:APA91bH7ve4zu4zjhgo9cbRDu3uxwDMqkEdU_dy5ey9iMn-hkLDP66ayuOq4K-UFMekgSw5W2E-LjLB4yvWNGm31yToZb_RFmPS55iKK0N-2mlGhEmcyda8',
@@ -92,8 +92,6 @@ function createMessage(token, platform) {
         },
       },
     };
-    console.log('[iOS] 메시지 생성 완료');
-    return iosMessage;
   }
 
   console.log('[ERROR] 알 수 없는 플랫폼:', platform);
