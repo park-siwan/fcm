@@ -9,18 +9,16 @@ const FCM_URL =
 // 토큰 배열 (플랫폼별로 구분)
 const tokens = {
   ios: [
-    'dMTtn9MhdUF8kSzckjyV-K:APA91bHk73NuxfIcUXFmJsf0XR-I-8lTERCLdnxmxHw9u8mSHXRZGhT_pCW1dWF2I-JFlgOm5l_0jXXSQy6OuY3k9Cs9vsEa1YDjA0Sh0Mn-ANCydjEH7mo',
+    'eyIF99Bh1k5jlhNANJ3EB-:APA91bHxsGa5-GfXY7jFWwtKUNeL7LBdcejd8BDJxIJDm7RQaDyr_ydyO-48f7R0oRzd4APWpGf8S7tStVKHt52rVo9MGKFkxtUWdDbd3ReeptFWybPn7Io',
   ],
-  android: [
-    'cCXn-pRQRnafokLmnG9SXU:APA91bH7ve4zu4zjhgo9cbRDu3uxwDMqkEdU_dy5ey9iMn-hkLDP66ayuOq4K-UFMekgSw5W2E-LjLB4yvWNGm31yToZb_RFmPS55iKK0N-2mlGhEmcyda8',
-  ],
+  android: [],
 };
 
 // 메시지 데이터 (공통 부분)
 const notificationTitle =
-  '응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)';
+  '박시완응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)';
 const notificationBody =
-  '참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.';
+  '박시완참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.';
 const targetUrl =
   'http://localhost:3000/ko/help/9154d7dfe98b46af9a39bbf373039fec';
 
