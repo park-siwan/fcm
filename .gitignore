@@ -1,0 +1,42 @@
+# Go 관련 무시 항목
+/go/bin/
+/go/pkg/
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+
+# Node.js 관련 무시 항목
+/node/node_modules/
+/node/.env
+/node/.env.local
+/node/.env.development.local
+/node/.env.test.local
+/node/.env.production.local
+/node/npm-debug.log*
+/node/yarn-debug.log*
+/node/yarn-error.log*
+/node/package-lock.json
+/node/.DS_Store
+
+# 인증 관련 파일
+*.pem
+*.key
+/certs/*
+/key.json
+serviceAccountKey.json
+google-services.json
+
+# 로그 파일 
+/log/*
+
+# 개발 환경 관련
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo 
