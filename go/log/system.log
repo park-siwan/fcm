@@ -1,8 +1,0 @@
-[36mINFO[0m[2025-04-15T17:05:44+09:00]/Users/siwan/Documents/projects/fcm/cmd/main.go:14 main.main() FCM 메시지 전송 프로그램 시작                           
-[36mINFO[0m[2025-04-15T17:05:44+09:00]/Users/siwan/Documents/projects/fcm/cmd/main.go:28 main.main() 메시지 전송 시작: 테스트 알림                            
-[31mERRO[0m[2025-04-15T17:05:44+09:00]/Users/siwan/Documents/projects/fcm/sendMessage/main.go:34 goTest/sendMessage.(*Message).SendMessage() FCM 클라이언트 생성 실패: project ID is required to access Firebase Cloud Messaging client 
-[31mERRO[0m[2025-04-15T17:05:44+09:00]/Users/siwan/Documents/projects/fcm/cmd/main.go:31 main.main() 메시지 전송 오류: FCM 클라이언트 생성 실패: project ID is required to access Firebase Cloud Messaging client 
-[36mINFO[0m[2025-04-15T17:07:13+09:00]/Users/siwan/Documents/projects/fcm/cmd/main.go:14 main.main() FCM 메시지 전송 프로그램 시작                           
-[36mINFO[0m[2025-04-15T17:07:13+09:00]/Users/siwan/Documents/projects/fcm/cmd/main.go:28 main.main() 메시지 전송 시작: 테스트 알림                            
-[31mERRO[0m[2025-04-15T17:07:13+09:00]/Users/siwan/Documents/projects/fcm/sendMessage/main.go:40 goTest/sendMessage.(*Message).SendMessage() FCM 클라이언트 생성 실패: unexpected end of JSON input 
-[31mERRO[0m[2025-04-15T17:07:13+09:00]/Users/siwan/Documents/projects/fcm/cmd/main.go:31 main.main() 메시지 전송 오류: FCM 클라이언트 생성 실패: unexpected end of JSON input 
