@@ -14,11 +14,12 @@ const tokens = {
   android: [
     'cfgmh4i1RqKtixy-rMYf9I:APA91bGxIO3dTWWC0Vq91_aCUUCoMsehLceYSQhhl0PGHXMY3DYdcJ7bTqNIz9G_xzs0DNMSdLmdGHVemomM_IHPtl3fGWSFK5BDbsO4tTY5TKhrPlll2tU',
   ],
+  android: [],
 };
 
 // 메시지 데이터 (공통 부분)
 const notificationTitle =
-  '응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)';
+  '박시완응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)응급상황(낙상감지)';
 const notificationBody =
   '참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.참여자의 낙상이 감지되었습니다.';
 // const targetUrl =
@@ -93,8 +94,6 @@ function createMessage(token, platform) {
         },
       },
     };
-    console.log('[iOS] 메시지 생성 완료');
-    return iosMessage;
   }
 
   console.log('[ERROR] 알 수 없는 플랫폼:', platform);
